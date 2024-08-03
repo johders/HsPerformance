@@ -23,7 +23,7 @@
             {
                 Id = Guid.Parse("{bedc18f0-1396-43e5-862e-bac7f34149d2}"),
                 Name = "Lunge with reach",
-                VideoUrl = "https://youtu.be/JVzLwJFaGcQ",
+                VideoUrl = "https://www.youtube.com/watch?v=JVzLwJFaGcQ",
                 Description = "Stand up tall with your feet shoulder-width apart. " +
                 "\r\n\r\n1. Step forward with your right foot, lowering your body into a basic lunge position." +
                 "\r\n2. Twist your upper body to the right from your midsection. Keep your core engaged, squeeze your glutes, and be careful to not rotate your knee." +

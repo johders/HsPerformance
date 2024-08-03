@@ -11,7 +11,7 @@
             {
                 string imgLink = "https://img.youtube.com/vi/";
                 string[] temp = VideoUrl.Split(new char[] { '=', '&' });
-                return $"{imgLink}{temp[1]}2/jpg";
+                return $"{imgLink}{temp[1]}/2.jpg";
             }
         }
         public string Description { get; set; }

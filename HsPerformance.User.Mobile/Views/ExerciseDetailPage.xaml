@@ -9,12 +9,14 @@
             <Grid>
                 <VerticalStackLayout Padding="10">
                     <!--Name-->
-                    <Label Text="{Binding Exercise.Name, Mode=OneWay}"/>
+                    <Label 
+                        Text="{Binding Exercise.Name, Mode=OneWay}"
+                        Style="{StaticResource TitleLabelStyle}"/>
                     
                     <!--Image-->
                     <Image
-                        Source="{Binding ImageUrl}"
-                        WidthRequest="100"/>
+                        Source="{Binding Exercise.ImageUrl}"
+                        HorizontalOptions="Fill"/>
 
                     <Grid RowDefinitions="Auto, *">
                         <Grid
@@ -32,6 +34,7 @@
                             <Label
                                 Grid.Row="0"
                                 Grid.Column="1"
+                                Style="{StaticResource ValueLabelStyle}"
                                 Text="{Binding Sets}"/>
 
                             <!--Reps-->
@@ -43,6 +46,7 @@
                             <Label
                                 Grid.Row="1"
                                 Grid.Column="1"
+                                Style="{StaticResource ValueLabelStyle}"
                                 Text="{Binding Reps}"/>
 
                             <!--Duration-->
@@ -54,6 +58,7 @@
                             <Label
                                 Grid.Row="2"
                                 Grid.Column="1"
+                                Style="{StaticResource ValueLabelStyle}"
                                 Text="{Binding Duration}"/>
 
                             <!--Rest-->
@@ -65,6 +70,7 @@
                             <Label
                                 Grid.Row="3"
                                 Grid.Column="1"
+                                Style="{StaticResource ValueLabelStyle}"
                                 Text="{Binding Rest}"/>
 
                         </Grid>
