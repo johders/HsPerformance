@@ -1,4 +1,6 @@
-﻿namespace HsPerformance.User.Mobile
+﻿using HsPerformance.User.Mobile.Views;
+
+namespace HsPerformance.User.Mobile
 {
     public partial class App : Application
     {
@@ -6,7 +8,8 @@
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            //MainPage = new AppShell();
+            MainPage = new ExerciseDetailPage();
         }
     }
 }
