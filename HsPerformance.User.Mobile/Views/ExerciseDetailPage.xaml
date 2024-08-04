@@ -10,65 +10,82 @@
                 <VerticalStackLayout Padding="10">
                     <!--Name-->
                     <Label 
-                        Text="{Binding Exercise.Name, Mode=OneWay}"
+                        Text="{Binding Exercise.Name, 
+                        TargetNullValue='No exercise name', 
+                        FallbackValue='No exercise found' , 
+                        Mode=OneWay}"
                         Style="{StaticResource TitleLabelStyle}"/>
                     
                     <!--Image-->
                     <Image
-                        Source="{Binding Exercise.ImageUrl}"
-                        HorizontalOptions="Fill"/>
+                        Source="{Binding Exercise.ImageUrl, FallbackValue=fallback.webp}"
+                        WidthRequest="200"/>
 
                     <Grid RowDefinitions="Auto, *">
                         <Grid
                             ColumnDefinitions=".3*,.7*"
                             ColumnSpacing="5"
-                            RowDefinitions="*,*,*,*"
+                            RowDefinitions="*,*,*,*,*"
                             RowSpacing="10">
+
+                            <!--Description-->
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Text="Description"/>
+
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                Style="{StaticResource ValueLabelStyle}"
+                                Text="{Binding Exercise.Description, 
+                                TargetNullValue='No exercise description', 
+                                FallbackValue='No exercise found'}"/>                                                       
 
                             <!--Sets-->
                             <Label
-                                Grid.Row="0"
+                                Grid.Row="1"
                                 Grid.Column="0"
                                 Text="Sets"/>
 
                             <Label
-                                Grid.Row="0"
+                                Grid.Row="1"
                                 Grid.Column="1"
                                 Style="{StaticResource ValueLabelStyle}"
                                 Text="{Binding Sets}"/>
 
                             <!--Reps-->
                             <Label
-                                Grid.Row="1"
+                                Grid.Row="2"
                                 Grid.Column="0"
                                 Text="Reps"/>           
 
                             <Label
-                                Grid.Row="1"
+                                Grid.Row="2"
                                 Grid.Column="1"
                                 Style="{StaticResource ValueLabelStyle}"
                                 Text="{Binding Reps}"/>
 
                             <!--Duration-->
                             <Label
-                                Grid.Row="2"
+                                Grid.Row="3"
                                 Grid.Column="0"
                                 Text="Duration"/>
 
                             <Label
-                                Grid.Row="2"
+                                Grid.Row="3"
                                 Grid.Column="1"
                                 Style="{StaticResource ValueLabelStyle}"
                                 Text="{Binding Duration}"/>
 
                             <!--Rest-->
                             <Label
-                                Grid.Row="3"
+                                Grid.Row="4"
                                 Grid.Column="0"
                                 Text="Rest"/>
 
                             <Label
-                                Grid.Row="3"
+                                Grid.Row="4"
                                 Grid.Column="1"
                                 Style="{StaticResource ValueLabelStyle}"
                                 Text="{Binding Rest}"/>
