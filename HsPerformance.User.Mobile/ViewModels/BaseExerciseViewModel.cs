@@ -5,11 +5,11 @@
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string VideoUrl { get; set; }
-        public string ImageUrl 
-        { 
-            get 
+        public string ImageUrl
+        {
+            get
             {
-                if(VideoUrl != null)
+                if (VideoUrl != null)
                 {
                     string imgLink = "https://img.youtube.com/vi/";
                     string[] temp = VideoUrl.Split(new char[] { '=', '&' });

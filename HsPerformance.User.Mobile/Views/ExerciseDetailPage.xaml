@@ -2,8 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HsPerformance.User.Mobile.Views.ExerciseDetailPage"
+             xmlns:converters="clr-namespace:HsPerformance.User.Mobile.Converters"
              Title="ExerciseDetailPage">
 
+    <ContentPage.Resources>
+        <converters:DurationVisibilityConverter x:Key="DurationVisibilityConverter"/>
+        <converters:RepsVisibilityConverter x:Key="RepsVisibilityConverter"/>
+    </ContentPage.Resources>
+    
     <Grid>
         <ScrollView>
             <Grid>
@@ -16,7 +22,6 @@
                         Mode=OneWay}"
                         Style="{StaticResource TitleLabelStyle}"/>
                     
-                    <!--Image-->
                     <Image
                         Source="{Binding Exercise.ImageUrl, FallbackValue=fallback.webp}"
                         WidthRequest="200"/>
@@ -58,24 +63,28 @@
                             <Label
                                 Grid.Row="2"
                                 Grid.Column="0"
+                                IsVisible="{Binding Reps, Converter={StaticResource RepsVisibilityConverter}}"                           
                                 Text="Reps"/>           
 
                             <Label
                                 Grid.Row="2"
                                 Grid.Column="1"
                                 Style="{StaticResource ValueLabelStyle}"
+                                IsVisible="{Binding Reps, Converter={StaticResource RepsVisibilityConverter}}"
                                 Text="{Binding Reps}"/>
 
                             <!--Duration-->
                             <Label
                                 Grid.Row="3"
                                 Grid.Column="0"
+                                IsVisible="{Binding Duration, Converter={StaticResource DurationVisibilityConverter}}"                                                              
                                 Text="Duration"/>
 
                             <Label
                                 Grid.Row="3"
                                 Grid.Column="1"
                                 Style="{StaticResource ValueLabelStyle}"
+                                IsVisible="{Binding Duration, Converter={StaticResource DurationVisibilityConverter}}"                                
                                 Text="{Binding Duration}"/>
 
                             <!--Rest-->
