@@ -12,6 +12,9 @@ namespace HsPerformance.User.Mobile.ViewModels
         private UserViewModel _user;
 
         [ObservableProperty]
+        private DateTime _date;
+
+        [ObservableProperty]
         private BaseExerciseViewModel _exercise;
 
         [ObservableProperty]
