@@ -1,48 +1,41 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 
 namespace HsPerformance.User.Mobile.ViewModels
 {
-    public class ExerciseDetailViewModel : INotifyPropertyChanged
+    public partial class ExerciseDetailViewModel : ObservableObject
     {
-        private ExerciseStatusEnum _status;
+        [ObservableProperty]
+        private Guid _id;
 
-        public Guid Id { get; set; }
-        public UserViewModel User { get; set; }
-        public BaseExerciseViewModel Exercise { get; set; }
-        public int Sets { get; set; }
-        public int Reps { get; set; }
-        public int Duration { get; set; }
-        public int Rest { get; set; }
+        [ObservableProperty]
+        private UserViewModel _user;
 
+        [ObservableProperty]
+        private BaseExerciseViewModel _exercise;
 
-        public ExerciseStatusEnum Status
-        {
-            get => _status;
-            set
-            {
-                if (!value.Equals(_status))
-                {
-                    _status = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
+        [ObservableProperty]
+        private int _sets;
 
-        public ICommand CompleteExerciseCommand { get; }
+        [ObservableProperty]
+        private int _reps;
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName]string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        [ObservableProperty]
+        private int _duration;
 
-        private void CompleteExercise() => Status = ExerciseStatusEnum.Completed;
+        [ObservableProperty]
+        private int _rest;
+
+        [ObservableProperty]
+        [NotifyCanExecuteChangedFor(nameof(CompleteExerciseCommand))]
+        private ExerciseStatusEnum _exerciseStatus;
+
+        [RelayCommand(CanExecute = nameof(CanCompleteExercise))]
+        private void CompleteExercise() => ExerciseStatus = ExerciseStatusEnum.Completed;
+        private bool CanCompleteExercise() => ExerciseStatus != ExerciseStatusEnum.Completed;
 
         public ExerciseDetailViewModel()
         {
-            CompleteExerciseCommand = new Command(CompleteExercise);
 
             Id = Guid.Parse("{8ef61111-65be-4e96-9d54-0fde6ec6f423}");
             User = new UserViewModel
@@ -64,7 +57,7 @@ namespace HsPerformance.User.Mobile.ViewModels
             Reps = 20;
             //Duration = 45;
             Rest = 30;
-            Status = ExerciseStatusEnum.NotCompleted;
+            ExerciseStatus = ExerciseStatusEnum.NotCompleted;
         }
     }
 }

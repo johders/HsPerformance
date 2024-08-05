@@ -1,10 +1,21 @@
-﻿namespace HsPerformance.User.Mobile.ViewModels
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace HsPerformance.User.Mobile.ViewModels
 {
-    public class BaseExerciseViewModel
+    public partial class BaseExerciseViewModel : ObservableObject
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string VideoUrl { get; set; }
+        [ObservableProperty]
+        private Guid _id;
+
+        [ObservableProperty]
+        private string _name = string.Empty;
+
+        [ObservableProperty]
+        private string _videoUrl = string.Empty;
+
+        [ObservableProperty]
+        private string _description = string.Empty;
+
         public string ImageUrl
         {
             get
@@ -18,7 +29,6 @@
                 return "https://answers-afd.microsoft.com/static/images/image-not-found.jpg";
             }
         }
-        public string Description { get; set; }
 
     }
 }

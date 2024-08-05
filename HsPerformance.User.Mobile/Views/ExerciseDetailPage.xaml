@@ -110,15 +110,16 @@
                                 Grid.Row="5"
                                 Grid.Column="1"
                                 Style="{StaticResource ValueLabelStyle}"
-                                Text="{Binding Status, Converter={StaticResource StatusEnumToStringConverter}}"/>                            
+                                Text="{Binding ExerciseStatus, Converter={StaticResource StatusEnumToStringConverter}}"/>                            
 
                         </Grid>
                     </Grid>
                     <VerticalStackLayout Grid.Row="1">
                         <Button
                             Margin="0,10,0,0"
-                            Text="Completed"
-                            Command="{Binding CompleteExerciseCommand}"/>
+                            Text="Workout completed"
+                            Command="{Binding CompleteExerciseCommand}"
+                            IsVisible="{Binding IsEnabled, Source={RelativeSource Self}}"/>
                     </VerticalStackLayout>
                     
 
