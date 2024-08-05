@@ -8,6 +8,7 @@
     <ContentPage.Resources>
         <converters:DurationVisibilityConverter x:Key="DurationVisibilityConverter"/>
         <converters:RepsVisibilityConverter x:Key="RepsVisibilityConverter"/>
+        <converters:StatusEnumToStringConverter x:Key="StatusEnumToStringConverter"/>
     </ContentPage.Resources>
     
     <Grid>
@@ -30,7 +31,7 @@
                         <Grid
                             ColumnDefinitions=".3*,.7*"
                             ColumnSpacing="5"
-                            RowDefinitions="*,*,*,*,*"
+                            RowDefinitions="*,*,*,*,*,*"
                             RowSpacing="10">
 
                             <!--Description-->
@@ -85,7 +86,7 @@
                                 Grid.Column="1"
                                 Style="{StaticResource ValueLabelStyle}"
                                 IsVisible="{Binding Duration, Converter={StaticResource DurationVisibilityConverter}}"                                
-                                Text="{Binding Duration}"/>
+                                Text="{Binding Duration, StringFormat='{0} seconds'}"/>
 
                             <!--Rest-->
                             <Label
@@ -98,10 +99,28 @@
                                 Grid.Column="1"
                                 Style="{StaticResource ValueLabelStyle}"
                                 Text="{Binding Rest}"/>
+                            
+                            <!--Exercise Status-->
+                            <Label
+                                Grid.Row="5"
+                                Grid.Column="0"
+                                Text="Status"/>
+
+                            <Label
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                Style="{StaticResource ValueLabelStyle}"
+                                Text="{Binding Status, Converter={StaticResource StatusEnumToStringConverter}}"/>                            
 
                         </Grid>
                     </Grid>
-
+                    <VerticalStackLayout Grid.Row="1">
+                        <Button
+                            Margin="0,10,0,0"
+                            Text="Completed"
+                            Command="{Binding CompleteExerciseCommand}"/>
+                    </VerticalStackLayout>
+                    
 
                 </VerticalStackLayout>
             </Grid>
