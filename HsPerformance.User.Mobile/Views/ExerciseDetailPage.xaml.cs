@@ -4,9 +4,9 @@ namespace HsPerformance.User.Mobile.Views;
 
 public partial class ExerciseDetailPage : ContentPage
 {
-	public ExerciseDetailPage()
+	public ExerciseDetailPage(ExerciseDetailViewModel vm)
 	{
 		InitializeComponent();
-		BindingContext = new ExerciseDetailViewModel();
+		BindingContext = vm;
 	}
 }

@@ -1,15 +1,34 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using HsPerformance.User.Mobile.Services;
+using System.Collections.ObjectModel;
 
 namespace HsPerformance.User.Mobile.ViewModels
 {
     public partial class ExerciseListOverviewViewModel : ObservableObject
     {
-        [ObservableProperty]
-        private List<ExerciseListItemViewModel> _exercises = new();
+        private readonly INavigationService _navigationService;
 
-        public ExerciseListOverviewViewModel()
+        [ObservableProperty]
+        private ObservableCollection<ExerciseListItemViewModel> _exercises = new();
+
+        [ObservableProperty]
+        private ExerciseListItemViewModel? _selectedExercise;
+
+        [RelayCommand]
+        private async Task NavigateToSelectedExercise()
         {
-            Exercises = new List<ExerciseListItemViewModel>()
+            if(SelectedExercise is not null)
+            {
+                await _navigationService.GoToSelectedExercise(SelectedExercise.Id);
+                SelectedExercise = null;
+            }
+        }
+        public ExerciseListOverviewViewModel(INavigationService navigationService)
+        {
+            _navigationService = navigationService;
+
+            Exercises = new ObservableCollection<ExerciseListItemViewModel>()
             {
                 new(Guid.Parse("{71ef8bb6-06af-4437-847c-e13fef88ae5c}"), 
                 DateTime.Today,
@@ -63,6 +82,29 @@ namespace HsPerformance.User.Mobile.ViewModels
                 }, 3, 0, 60, 30),
 
             };
+            AddExercise();
+        }
+
+        private async void AddExercise()
+        {
+            await Task.Delay(8000);
+
+            var exercise = new ExerciseListItemViewModel(
+                Guid.Parse("{75e98072-0bf5-4308-84e9-1b13e530c4bc}"),
+                DateTime.Today,
+                new BaseExerciseViewModel
+                {
+                    Id = Guid.Parse("{0e463741-40c9-441f-9000-a550511a0c21}"),
+                    Name = "Squat",
+                    VideoUrl = "https://www.youtube.com/watch?v=xqvCmoLULNY",
+                    Description = "Start with feet slightly wider than hip-width apart, toes turned slightly out.\r\nKeeping your chest up and out and " +
+                    "the pressure even in your feet, engage your abdominals and shift your weight back into your heels as you push your hips back." +
+                    "\r\nLower yourself into a squat until either your heels begin to lift off the floor, or until your torso begins to round or flex forward. " +
+                    "Your depth should be determined by your form.\r\nKeep your chest out and core tight as you push through your heels to stand back " +
+                    "up to your starting position. Squeeze your glutes at the top.\r\nPerform 10–15 reps. Work up to 3 sets."
+                }, 6, 12, 0, 30, ExerciseStatusEnum.Completed);
+            
+            Exercises.Add(exercise);
         }
     }
 }

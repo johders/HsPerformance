@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using HsPerformance.User.Mobile.Services;
+using HsPerformance.User.Mobile.ViewModels;
+using HsPerformance.User.Mobile.Views;
+using Microsoft.Extensions.Logging;
 
 namespace HsPerformance.User.Mobile
 {
@@ -13,13 +16,37 @@ namespace HsPerformance.User.Mobile
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+                })
+                .RegisterServices()
+                .RegisterViewModels()
+                .RegisterViews();
+            
 
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
+        }
+
+        private static MauiAppBuilder RegisterServices(this  MauiAppBuilder builder)
+        {
+            builder.Services.AddSingleton<INavigationService, NavigationService>();
+            return builder;
+        }
+
+        private static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
+        {
+            builder.Services.AddSingleton<ExerciseListOverviewViewModel>();
+            builder.Services.AddTransient<ExerciseDetailViewModel>();
+            return builder;
+        }
+
+        private static MauiAppBuilder RegisterViews(this MauiAppBuilder builder)
+        {
+            builder.Services.AddSingleton<ExerciseOverviewPage>();
+            builder.Services.AddTransient<ExerciseDetailPage>();
+            return builder;
         }
     }
 }

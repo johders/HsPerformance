@@ -16,8 +16,12 @@ namespace HsPerformance.User.Mobile.Converters
                 return string.Empty;
             }
 
-            if ((int)values[1] != 0) return $"{values[0]} X {values[1]}";
-            else return $"{values[0]} X {values[2]} seconds";
+            int sets = (int)values[0];
+            int reps = (int)values[1];
+            int duration = (int)values[2];
+
+            if (reps != 0) return $"{sets} X {reps}";
+            else return $"{sets} X {duration} seconds";
         }
 
         public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)

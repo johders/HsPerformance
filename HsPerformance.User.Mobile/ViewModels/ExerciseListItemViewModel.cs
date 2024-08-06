@@ -1,16 +1,35 @@
-﻿namespace HsPerformance.User.Mobile.ViewModels
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+
+namespace HsPerformance.User.Mobile.ViewModels
 {
-    public class ExerciseListItemViewModel
+    public partial class ExerciseListItemViewModel : ObservableObject
     {
-        public Guid Id { get; set; }
-        public UserViewModel? User { get; set; }
-        public DateTime Date { get; set; }
-        public BaseExerciseViewModel Exercise { get; set; }
-        public int Sets { get; set; }
-        public int Reps { get; set; }
-        public int Duration { get; set; }
-        public int Rest { get; set; }
-        public ExerciseStatusEnum Status { get; set; }
+        [ObservableProperty]
+        private Guid _id;
+
+        [ObservableProperty]
+        private UserViewModel? _user;
+
+        [ObservableProperty]
+        private DateTime _date;
+
+        [ObservableProperty]
+        private BaseExerciseViewModel _exercise;
+
+        [ObservableProperty]
+        private int _sets;
+
+        [ObservableProperty]
+        private int _reps;
+
+        [ObservableProperty]
+        private int _duration;
+
+        [ObservableProperty]
+        private int _rest;
+
+        [ObservableProperty]
+        private ExerciseStatusEnum _exerciseStatus;
 
         public ExerciseListItemViewModel(Guid id, DateTime date, 
             BaseExerciseViewModel exercise, int sets, int reps, int duration, int rest, 
@@ -23,7 +42,7 @@
             Reps = reps;
             Duration = duration;
             Rest = rest;
-            Status = status;
+            ExerciseStatus = status;
             User = user;
         }
     }
