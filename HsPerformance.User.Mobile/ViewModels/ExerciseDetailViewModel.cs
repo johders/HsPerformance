@@ -3,7 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace HsPerformance.User.Mobile.ViewModels
 {
-    public partial class ExerciseDetailViewModel : ObservableObject
+    public partial class ExerciseDetailViewModel : ObservableObject, IQueryAttributable
     {
         [ObservableProperty]
         private Guid _id;
@@ -36,6 +36,16 @@ namespace HsPerformance.User.Mobile.ViewModels
         [RelayCommand(CanExecute = nameof(CanCompleteExercise))]
         private void CompleteExercise() => ExerciseStatus = ExerciseStatusEnum.Completed;
         private bool CanCompleteExercise() => ExerciseStatus != ExerciseStatusEnum.Completed;
+
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
+        {
+            var exerciseId = query["ExerciseId"].ToString();
+            if(Guid.TryParse(exerciseId, out var selectedId))
+            {
+                Id = selectedId;
+                GetEvent(Id);
+            }
+        }
 
         public ExerciseDetailViewModel()
         {

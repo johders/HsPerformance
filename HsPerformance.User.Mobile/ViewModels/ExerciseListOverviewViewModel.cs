@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 
 namespace HsPerformance.User.Mobile.ViewModels
 {
+
     public partial class ExerciseListOverviewViewModel : ObservableObject
     {
         private readonly INavigationService _navigationService;
@@ -106,5 +107,6 @@ namespace HsPerformance.User.Mobile.ViewModels
             
             Exercises.Add(exercise);
         }
+
     }
 }
