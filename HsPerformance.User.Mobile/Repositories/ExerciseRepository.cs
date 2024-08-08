@@ -1,27 +1,37 @@
 ﻿using HsPerformance.User.Mobile.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HsPerformance.User.Mobile.Repositories
 {
     public class ExerciseRepository : IExerciseRepository
     {
-        public Task<ExerciseModel> GetExercise(Guid id)
+        public async Task<ExerciseModel?> GetExercise(Guid id)
         {
-            throw new NotImplementedException();
+            return ExerciseRepositoryData().FirstOrDefault(e => e.Id == id);
         }
 
-        public Task<List<ExerciseModel>> GetExercises()
+        public async Task<List<ExerciseModel>> GetExercises()
         {
-            throw new NotImplementedException();
+            List<ExerciseModel> allItems = ExerciseRepositoryData();
+            return allItems;
         }
 
-        public Task<bool> UpdateStatus(Guid id, ExerciseStatusModel status)
+        public async Task<bool> UpdateStatus(Guid id, ExerciseStatusModel status)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var exercise = ExerciseRepositoryData().FirstOrDefault(e => e.Id == id);
+                if (exercise != null)
+                {
+                    exercise.Status = status;
+                    return true;
+                }                
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return false;
         }
 
         public List<ExerciseModel> ExerciseRepositoryData()

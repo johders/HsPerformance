@@ -11,8 +11,7 @@ namespace HsPerformance.User.Mobile.Repositories
     public interface IExerciseRepository
     {
         Task<List<ExerciseModel>> GetExercises();
-
-        Task<ExerciseModel> GetExercise(Guid id);
+        Task<ExerciseModel?> GetExercise(Guid id);
         Task<bool> UpdateStatus(Guid id, ExerciseStatusModel status);
     }
 }
