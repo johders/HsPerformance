@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Messaging;
+using HsPerformance.User.Mobile.Messages;
 
 namespace HsPerformance.User.Mobile.ViewModels
 {
-    public partial class ExerciseListItemViewModel : ObservableObject
+    public partial class ExerciseListItemViewModel : ObservableObject, IRecipient<StatusChangedMessage>
     {
         [ObservableProperty]
         private Guid _id;
@@ -44,6 +46,16 @@ namespace HsPerformance.User.Mobile.ViewModels
             Rest = rest;
             ExerciseStatus = status;
             User = user;
+
+            WeakReferenceMessenger.Default.Register(this);
+        }
+
+        public void Receive(StatusChangedMessage message)
+        {
+            if(message.ExerciseId == Id)
+            {
+                ExerciseStatus = message.Status;
+            }
         }
     }
 }

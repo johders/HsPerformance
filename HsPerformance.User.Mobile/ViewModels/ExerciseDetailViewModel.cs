@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
+using HsPerformance.User.Mobile.Messages;
 using HsPerformance.User.Mobile.Models;
 using HsPerformance.User.Mobile.Services;
 using HsPerformance.User.Mobile.ViewModels.Base;
@@ -39,7 +41,14 @@ namespace HsPerformance.User.Mobile.ViewModels
         private ExerciseStatusEnum _exerciseStatus;
 
         [RelayCommand(CanExecute = nameof(CanCompleteExercise))]
-        private void CompleteExercise() => ExerciseStatus = ExerciseStatusEnum.Completed;
+        private async Task CompleteExercise()
+        {
+            if(await _exerciseService.UpdateStatus(Id, ExerciseStatusModel.Completed))
+            {
+                ExerciseStatus = ExerciseStatusEnum.Completed;
+                WeakReferenceMessenger.Default.Send(new StatusChangedMessage(Id, ExerciseStatus));
+            }
+        }
         private bool CanCompleteExercise() => ExerciseStatus != ExerciseStatusEnum.Completed;
 
         private async Task GetExercise(Guid id)
