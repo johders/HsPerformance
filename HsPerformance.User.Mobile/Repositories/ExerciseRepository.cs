@@ -85,7 +85,7 @@ namespace HsPerformance.User.Mobile.Repositories
 
                 new()
                 {
-                    Id= Guid.Parse("{71ef8bb6-06af-4437-847c-e13fef88ae5c}"),
+                    Id= Guid.Parse("{9c109c6e-f302-423c-ba2b-115f995d4e27}"),
                     Date = DateTime.Today,
                     Exercise =
                         new BaseExerciseModel

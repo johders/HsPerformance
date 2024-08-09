@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HsPerformance.User.Mobile.Views.ExerciseDetailPage"
              xmlns:converters="clr-namespace:HsPerformance.User.Mobile.Converters"
+             xmlns:views="clr-namespace:HsPerformance.User.Mobile.Views"
              Title="ExerciseDetailPage">
 
     <ContentPage.Resources>
@@ -121,11 +122,14 @@
                             Command="{Binding CompleteExerciseCommand}"
                             IsVisible="{Binding IsEnabled, Source={RelativeSource Self}}"/>
                     </VerticalStackLayout>
-                    
 
                 </VerticalStackLayout>
             </Grid>
         </ScrollView>
+        <Grid BackgroundColor="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}"
+              IsVisible="{Binding IsLoading}">
+            <ActivityIndicator IsRunning="{Binding IsLoading}"/>
+        </Grid>
     </Grid>
     
-</ContentPage>
+</views:ContentPageBase>

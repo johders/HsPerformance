@@ -2,12 +2,13 @@
 using CommunityToolkit.Mvvm.Input;
 using HsPerformance.User.Mobile.Models;
 using HsPerformance.User.Mobile.Services;
+using HsPerformance.User.Mobile.ViewModels.Base;
 using System.Collections.ObjectModel;
 
 namespace HsPerformance.User.Mobile.ViewModels
 {
 
-    public partial class ExerciseListOverviewViewModel : ObservableObject
+    public partial class ExerciseListOverviewViewModel : ViewModelBase
     {
         private readonly IExerciseService _exerciseService;
         private readonly INavigationService _navigationService;
@@ -31,8 +32,14 @@ namespace HsPerformance.User.Mobile.ViewModels
         {
             _exerciseService = exerciseService;
             _navigationService = navigationService;
+        }
 
-            GetExercises();
+        public override async Task LoadAsync()
+        {
+            if(Exercises.Count == 0)
+            {
+                await Loading(GetExercises);
+            }
         }
 
         private async Task GetExercises()

@@ -2,10 +2,11 @@
 using CommunityToolkit.Mvvm.Input;
 using HsPerformance.User.Mobile.Models;
 using HsPerformance.User.Mobile.Services;
+using HsPerformance.User.Mobile.ViewModels.Base;
 
 namespace HsPerformance.User.Mobile.ViewModels
 {
-    public partial class ExerciseDetailViewModel : ObservableObject, IQueryAttributable
+    public partial class ExerciseDetailViewModel : ViewModelBase, IQueryAttributable
     {
         private readonly IExerciseService _exerciseService;
 
@@ -41,7 +42,7 @@ namespace HsPerformance.User.Mobile.ViewModels
         private void CompleteExercise() => ExerciseStatus = ExerciseStatusEnum.Completed;
         private bool CanCompleteExercise() => ExerciseStatus != ExerciseStatusEnum.Completed;
 
-        private async Task GetEvent(Guid id)
+        private async Task GetExercise(Guid id)
         {
             var exercise = await _exerciseService.GetExercise(id);
 
@@ -70,6 +71,18 @@ namespace HsPerformance.User.Mobile.ViewModels
             ExerciseStatus = (ExerciseStatusEnum)exercise.Status;
         }
 
+        public override async Task LoadAsync()
+        {
+            await Loading(
+                async () =>
+                {
+                    if (Id != Guid.Empty)
+                    {
+                        await GetExercise(Id);
+                    }
+                });
+        }
+
         public ExerciseDetailViewModel(IExerciseService exerciseService)
         {
             _exerciseService = exerciseService;
@@ -81,7 +94,6 @@ namespace HsPerformance.User.Mobile.ViewModels
             if (Guid.TryParse(exerciseId, out var selectedId))
             {
                 Id = selectedId;
-                GetEvent(Id);
             }
         }
     }
