@@ -9,6 +9,7 @@ namespace HsPerformance.User.Mobile
             InitializeComponent();
 
             MainPage = new AppShell();
+            //MainPage = new MainPage();
             //MainPage = new ExerciseDetailPage();
             //MainPage = new ExerciseOverviewPage();
         }

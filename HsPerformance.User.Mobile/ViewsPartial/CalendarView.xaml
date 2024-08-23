@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:HsPerformance.User.Mobile.ViewModels"
+             x:Class="HsPerformance.User.Mobile.ViewsPartial.CalendarView">
+
+    <CollectionView ItemsSource="{Binding Dates}">
+        <CollectionView.ItemsLayout>
+            <LinearItemsLayout Orientation="Horizontal" ItemSpacing="10"/>
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="vm:CalendarListItemViewModel">
+                <Border WidthRequest="80" Padding="10">
+                    <VerticalStackLayout>
+                        <Label 
+                            Text="{Binding Date, StringFormat='{0:ddd}'}" 
+                            FontSize="18" 
+                            HorizontalTextAlignment="Center"/>
+                        <Label 
+                            Text="{Binding Date, StringFormat='{0:dd}'}" 
+                            FontSize="24" 
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                </Border>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentView>

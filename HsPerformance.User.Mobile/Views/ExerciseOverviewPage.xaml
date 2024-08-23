@@ -4,15 +4,22 @@
              x:Class="HsPerformance.User.Mobile.Views.ExerciseOverviewPage"
              xmlns:converters="clr-namespace:HsPerformance.User.Mobile.Converters"
              xmlns:views="clr-namespace:HsPerformance.User.Mobile.Views"
-             Title="ExerciseOverviewPage">
+             xmlns:partial="clr-namespace:HsPerformance.User.Mobile.ViewsPartial"
+             Title="Exercise Overview">
 
     <ContentPage.Resources>
         <converters:StatusEnumToStringConverter x:Key="StatusEnumToStringConverter"/>
         <converters:SetsAndRepsOrDurationToStringConverter x:Key="SetsAndRepsOrDurationToStringConverter"/>
     </ContentPage.Resources>
-    
-    <Grid>
-        <ScrollView>
+
+
+    <Grid RowDefinitions="auto, auto">
+       
+            <partial:CalendarView Grid.Row="0"/>
+        <ScrollView Grid.Row="1">
+
+
+
             <CollectionView
                 ItemsSource="{Binding Exercises}"
                 SelectedItem="{Binding SelectedExercise, Mode=TwoWay}"
